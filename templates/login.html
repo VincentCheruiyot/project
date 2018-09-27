@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Here</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='picc.png') }}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">PRO Tennis</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/signup">Sign Up</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <br><br><br><br>
+        <div class="col-sm-4" style="margin-top: 30px">
+            {% with messages = get_flashed_messages() %}
+                {% for m in messages %}
+                    <h2 class="text-center">{{ m }}</h2>
+                {% endfor %}
+            {% endwith %}
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <input type="email" name="email" required class="form-control" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="password" required class="form-control" placeholder="Password">
+                </div>
+                <button class="btn btn-primary btn-block">Login</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

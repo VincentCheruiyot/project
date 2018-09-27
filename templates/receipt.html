@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='picc.png') }}">
+    <title>Receipt</title>
+</head>
+<body style="background-color: rgba(244,236,245,0.02)">
+{% block body %}
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Pro Tennis</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/action">Action</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/invoice">Invoice</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/receipt">Receipt</a>
+                </li>
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link" href="/login">Login</a>#}
+                {#                </li>#}
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link" href="/signup">Sign Up</a>#}
+                {#                </li>#}
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link" href="/logout">Log Out</a>#}
+                {#                </li>#}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ session.get("names") }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="printMe">
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+
+                <h2></h2>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:ridge;"></h1>
+                <thead>
+                <tr>
+                    <div align="center">
+                        <div style="font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase">
+                            <th>PAYMENT RECEIPT</th>
+                        </div>
+                    </div>
+                </tr>
+                </thead>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:ridge;"></h1>
+                <div align="left">
+                    <img alt="" src="../static/images/pic11.ico" style="float:right">
+                </div>
+                <tbody align="left">
+                <div class="row justify-content-md-start">
+                    <tr>
+                        <div align="left">
+                            <div>
+                                <th>Pro Tennis</th>
+                            </div>
+                            <th>Plot # 108, Washika Rd</th>
+                            <div>
+                                <th>Lavington - Nairobi</th>
+                            </div>
+                            <div>
+                                <th>+254 723519257</th>
+                            </div>
+                        </div>
+                    </tr>
+                </div>
+                </tbody>
+                <br>
+                <br>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:dashed;"></h1>
+                <tbody align="left">
+                <div class="row justify-content-md-start">
+                    <tr>
+                        <div>
+                            <th>Received From:</th>
+                            <td><input type="text" value="{{ data["names"] }}"
+                                       style="font: bold 100% sans-serif; letter-spacing: 0.0em; text-align: left; text-transform: capitalize"
+                                       placeholder="Tennis Player"></td>
+                        </div>
+                    </tr>
+                </div>
+                </tbody>
+                <tbody align="right">
+                <div class="row justify-content-end">
+                    <div class="col-sm-5">
+                        <tr>
+                            <div align="right">
+                                <th>Receipt #</th>
+                                <td><input type="int" value="{{ data["number"] }}" placeholder="101" size="18px"></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div align="right">
+                                <th>Date Paid</th>
+                                <td><input type="date" value="{{ data["date"] }}" placeholder=""></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div align="right">
+                                <th>Amount Paid</th>
+                                <td><input type="text" style="font: bold 100% sans-serif;" value="{{ data["amount"] }}" placeholder="sh 5,000" size="15px"></td>
+                            </div>
+                        </tr>
+                    </div>
+                </div>
+                </tbody>
+                <br>
+                </thead>
+                <table class="table table-active table-striped">
+                    <tbody>
+                    <tr>
+                        <th>Invoice Reference</th>
+                        <th>Payment Reference</th>
+                        <th>Invoice Total</th>
+                        <th>Amount Paid</th>
+                        <th>Still Owing</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value="{{ data["invoicereference"] }}" placeholder="INV-11110" size="7px"></td>
+                        <td><input type="text" value="{{ data["paymentreference"] }}" placeholder="MPESA - MI51HMQ8UN"></td>
+                        <td><input type="text" value="{{ data["invoicetotal"] }}" placeholder="sh 5,000" size="7px"></td>
+                        <td><input type="text" value="{{ data["amountpaid"] }}" placeholder="sh 5,000" size="7px"></td>
+                        <td><input type="text" value="{{ data["stillowing"] }}" placeholder="sh 0" size="7px"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <tbody align="center">
+                <div class="row justify-content-end">
+                    <div class="col-sm-5">
+                        <tr>
+                            <div align="right">
+                                <th> Total Amount</th>
+                                <td><input type="text" value="{{ data["totalamount"] }}" placeholder="sh 5,000" size="9px"></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div align="right">
+                                <th> Amount Paid</th>
+                                <td><input type="text" value="{{ data["amountpaid"] }}" placeholder="sh 5,000" size="9px"></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div align="right">
+                                <th>Balance Due</th>
+                                <td><input type="text" value="{{ data["balancedue"] }}" placeholder="sh 0" size="9px"></td>
+                            </div>
+                        </tr>
+                    </div>
+                </div>
+                </tbody>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:dashed;"></h1>
+                <p align="left">Note: This receipt is computer generated and therefore not signed. It is a
+                    valid document issued by Pro Tennis</p>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:ridge;"></h1>
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}
+</body>
+<button class="btn btn-primary col-xs-5" onclick="printDiv('printMe')">Print</button>
+
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
+</html>
+

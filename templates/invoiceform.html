@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='picc.png') }}">
+    <title>Generate Invoice</title>
+</head>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">PRO Tennis</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/action">Action</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/invoiceform">Invoice</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/receiptform">Receipt</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">{{ session.get("names") }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% block body %}
+    <div class="modal-body">
+        <form action="{{ url_for('invoiceform') }}" method="post">
+            <div class="row justify-content-center">
+                <div class="col-sm-5">
+                    <h2>Generate Invoice</h2>
+                    <div class="form-group">
+                        <label>Invoice To</label>
+                        <input type="text" class="form-control" placeholder="Jane Doe" name="names" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Invoice #</label>
+                        <input type="text" class="form-control" placeholder="101" name="number" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Invoice Date</label>
+                        <input type="date" class="form-control" name="date" required="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Amount Due</label>
+                        <input type="text" class="form-control" name="amount" placeholder="sh 5,000" required="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" placeholder="10 lessons"
+                               name="description" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Rate per lesson</label>
+                        <input type="text" class="form-control" placeholder="sh 500" name="rate" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Number of lessons</label>
+                        <input type="text" class="form-control" name="lessons" placeholder="10" required="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Amount</label>
+                        <input type="text" class="form-control" placeholder="sh 5,000"
+                               name="amount" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Amount</label>
+                        <input type="text" class="form-control" placeholder="sh 5,000" name="amount" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Amount Paid</label>
+                        <input type="text" class="form-control" placeholder="sh 0" name="amountpaid" required="1">
+                    </div>
+                    <div class="form-group justify-content-center">
+                        <label>Balance Due</label>
+                        <input type="text" class="form-control" placeholder="sh 5,000"
+                               name="balance" required="">
+                        <div class="form-group">
+                            <br>
+                            <button class="btn btn-primary justify-content-center" type="submit">Generate</button>
+                        </div>
+{#                        <div class="modal-footer justify-content-end">#}
+{#                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>#}
+{#                        </div>#}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock body %}
+<script type="text/javascript" src="/static/jquery.js"></script>
+<script type="text/javascript" src="/static/bootstrap/js/bootstrap.js"></script>
+</html>

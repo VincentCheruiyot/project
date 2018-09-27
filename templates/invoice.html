@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='picc.png') }}">
+    <title>Invoice</title>
+</head>
+
+<body>
+{% block body %}
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Pro Tennis</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/action">Action</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/invoice">Invoice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/receipt">Receipt</a>
+                </li>
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link" href="/login">Login</a>#}
+                {#                </li>#}
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link" href="/signup">Sign Up</a>#}
+                {#                </li>#}
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link" href="/logout">Log Out</a>#}
+                {#                </li>#}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ session.get("names") }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="printMe">
+
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+
+                <h2></h2>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:ridge;"></h1>
+                <thead>
+                <tr>
+                    <div align="center">
+                        <div style="font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase">
+                            <th>INVOICE</th>
+                        </div>
+                    </div>
+                </tr>
+                </thead>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:ridge;"></h1>
+                <div align="left">
+                    <img alt="" src="../static/images/pic11.ico" style="float:right">
+                </div>
+                <br>
+                <tbody align="left">
+                <div class="row justify-content-md-start">
+                    <tr>
+                        <div align="left">
+                            <div>
+                                <th>Pro Tennis</th>
+                            </div>
+                            <div>
+                                <th>Plot # 108, Washika Rd</th>
+                            </div>
+                            <div>
+                                <th>Lavington - Nairobi</th>
+                            </div>
+                            <div>
+                                <th>+254 723519257</th>
+                            </div>
+                        </div>
+                    </tr>
+                </div>
+                <br>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:dashed;"></h1>
+                </tbody>
+
+                <tbody align="left">
+                <div class="row justify-content-md-start" id="invoice">
+                    <tr>
+                        <div align="left">
+                            <th>Invoice To:</th>
+
+                            <td>
+                                <input type="text" value="{{ data["names"] }}"
+                                       style="font: bold 100% sans-serif; letter-spacing: 0.0em; text-align: left; text-transform: capitalize"
+                                       placeholder="Tennis Player"></td>
+                        </div>
+                    </tr>
+                </div>
+                </tbody>
+                <tbody align="right">
+                <div class="row justify-content-end">
+                    <div class="col-sm-5">
+                        <tr>
+                            <div align="right">
+                                <th>Invoice #</th>
+                                <td><input type="text" value="{{ data["number"] }}" placeholder="101" size="18px"></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div align="right">
+                                <th>Invoice Date</th>
+                                <td><input type="date" value="{{ data["date"] }}" placeholder=""></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div align="right">
+                                <th>Amount Due</th>
+                                <td><input type="text" style="font: bold 100% sans-serif;" value="{{ data["amount"] }}" placeholder="sh 5,000" size="15px"></td>
+                            </div>
+                        </tr>
+                    </div>
+                </div>
+                </tbody>
+                <br>
+                <br>
+                <br>
+                <table class="table table-active table-striped" id="invoice">
+                    <tbody>
+                    <tr>
+                        <th>Description</th>
+                        <th>Rate per lesson</th>
+                        <th>Number of lessons</th>
+                        <th>Total Amount</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" value="{{ data["description"] }}" placeholder="10 lessons"></td>
+                        <td><input type="text" value="{{ data["rate"] }}" placeholder="sh 500" size="7px"></td>
+                        <td><input type="int" value="{{ data["lessons"] }}" placeholder="10" size="7px"></td>
+                        <td><input type="text" value="{{ data["amount"] }}" placeholder="sh 5,000" size="7px"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <tbody align="center">
+                <div class="row justify-content-end">
+                    <div class="col-sm-5">
+                        <tr>
+                            <div align="right">
+                                <th>Total Amount</th>
+                                <td><input type="text" value="{{ data["amount"] }}" placeholder="sh 5,000" size="9px"></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div align="right">
+                                <th>Amount Paid</th>
+                                <td><input type="text" value="{{ data["amountpaid"] }}" placeholder="sh 0" size="9px"></td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div align="right">
+                                <th>Balance Due</th>
+                                <td><input type="text" value="{{ data["balance"] }}" placeholder="sh 5,000" size="9px"></td>
+                            </div>
+                        </tr>
+                    </div>
+                </div>
+                </tbody>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:dashed;"></h1>
+                <p align="left">Make all cheques payable to: Maureen Cheptoo</p>
+                <p align="left">Contact +254 723519257 | maureencheptoo01@gmail.com for questions (if any)</p>
+                <h1 style="border-color: #999; border-width: 0 0 1px; margin: 0 0 1em; border-bottom-style:ridge;"></h1>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock body %}
+</body>
+
+{#<div class="col-sm-4">#}
+<button class="btn btn-primary" onclick="printDiv('printMe')">Print</button>
+{#</div>#}
+<script>
+
+    $(document).ready(function () {
+        $('#invoice').DataTable();
+    });
+
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
+</html>
+
+
